@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: dev
+  cloud:
+    config:
+      fail-fast: true
+
+---
+
+spring:
+  profiles: dev
+  cloud:
+    config:
+      profile: dev
+      uri: http://localhost:10180
+
+---
+
+spring:
+  profiles: test
+  cloud:
+    config:
+      profile: test
+      uri: http://192.168.99.100:10180

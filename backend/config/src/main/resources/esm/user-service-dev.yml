@@ -1,0 +1,4 @@
+logging:
+  level:
+    ru.sportmaster: DEBUG
+    org.springframework.web: DEBUG

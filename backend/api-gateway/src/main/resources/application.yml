@@ -1,0 +1,8 @@
+zuul:
+  routes:
+    user-service:
+      path: /api/v2/user/**
+      url: http://192.168.99.100:10017/api/v2/user
+    search-service:
+      path: /api/v2/search/**
+      url: http://192.168.99.100:10002/api/v2/search

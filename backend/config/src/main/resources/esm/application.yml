@@ -1,0 +1,7 @@
+primary-locale: ru-RU
+cdn:
+  uri: 10.100.50.222:8099
+email-server:
+  sender: support@host.com
+  smtp-host: name.host.ru
+  app-host: localhost:10017

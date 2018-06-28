@@ -1,0 +1,56 @@
+{
+  "id": "config-server",
+  "cpus": 0.1,
+  "mem": 256,
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": true,
+      "image": "host:5000/host/config-server"
+    },
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 0
+      }
+    ],
+    "volumes": [
+      {
+        "containerPath": "/tmp",
+        "hostPath": "/tmp",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/opt/config",
+        "hostPath": "/opt/config",
+        "mode": "RW"
+      }
+    ]
+  },
+  "env": {
+    "JAVA_OPTS": "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap",
+    "APP_OPTS": "-Dspring.profiles.active=test"
+  },
+  "healthChecks": [
+    {
+      "protocol": "MESOS_HTTP",
+      "path": "/actuator/health",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "labels": {
+    "HAPROXY_DEPLOYMENT_GROUP": "host-config-server",
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_REDIRECT_TO_HTTPS": "false",
+    "HAPROXY_0_VHOST": "config.marathon.mesos.host.com"
+  }
+}

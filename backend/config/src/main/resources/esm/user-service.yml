@@ -1,0 +1,19 @@
+mongodb:
+  uri: mongodb://localhost:27017/profile
+
+sms-confirmation:
+  code-length: 6
+  time-to-live: 10 # Minutes
+  retry-interval: 3 # Minutes
+  attempts-count: 3
+  alphabet-type: NUMERIC
+  collection-name: sms-confirmations
+
+email-confirmation:
+  code-length: 32
+  email-verification-remind-interval: 2880 # minutes, 2 days
+  email-verification-time-to-live: 525600 # minutes, 1 year
+  password-restore-time-to-live: 20160 # minutes, 2 weeks
+  alphabet-type: NUMERIC_AND_CHARS
+
+

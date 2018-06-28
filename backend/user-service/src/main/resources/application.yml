@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: dev
+  data:
+    mongodb:
+      uri: ${mongodb.uri}
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ['refresh', 'health']
+      base-path: '/sys'
+    enabled-by-default: false
+  endpoint:
+    refresh:
+      enabled: true
+    health:
+      enabled: true
+
+sm:
+  user:
+    viewHistory:
+      maxEntries: 20

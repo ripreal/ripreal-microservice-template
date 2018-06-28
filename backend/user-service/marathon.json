@@ -1,0 +1,51 @@
+{
+  "id": "host-user-service",
+  "cpus": 0.1,
+  "mem": 512,
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": true,
+      "image": "host:5000/host/user-service"
+    },
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 0
+      }
+    ],
+    "volumes": [
+      {
+        "containerPath": "/tmp",
+        "hostPath": "/tmp",
+        "mode": "RW"
+      }
+    ]
+  },
+  "env": {
+    "JAVA_OPTS": "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap",
+    "APP_OPTS": "-Dspring.profiles.active=test"
+  },
+  "healthChecks": [
+    {
+      "protocol": "MESOS_HTTP",
+      "path": "/sys/health",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "labels": {
+    "HAPROXY_DEPLOYMENT_GROUP": "host-user-service",
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_REDIRECT_TO_HTTPS": "false",
+    "HAPROXY_0_VHOST": "user.marathon.mesos.host.com"
+  }
+}

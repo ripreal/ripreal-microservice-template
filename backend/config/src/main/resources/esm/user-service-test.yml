@@ -1,0 +1,6 @@
+logging:
+  level:
+    ru.sportmaster: DEBUG
+    org.springframework.web: ERROR
+mongodb:
+  uri: mongodb://192.168.99.100:27017/profile
